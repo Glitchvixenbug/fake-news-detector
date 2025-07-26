@@ -8,7 +8,7 @@ model = joblib.load('logreg_model.joblib')
 
 app = Flask(__name__)
 
-# Professional, mobile-responsive HTML template
+# Full, professional, mobile-responsive HTML template with disclaimer
 HTML = """
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +65,12 @@ HTML = """
         <textarea name="news_text" class="form-control mb-3" rows="7" required placeholder="Paste news article here..."></textarea>
         <button type="submit" class="btn btn-primary w-100">Check News</button>
     </form>
+    
+    <!-- Disclaimer block -->
+    <div class="alert alert-warning mt-4" style="font-size: 0.98rem;">
+        <b>Disclaimer:</b> This tool is for educational and demonstration purposes only. Results are based on automated analysis and may not reflect factual accuracy. Do not rely solely on this application for important decisions. Always verify news from trusted sources.
+    </div>
+    
     {% if prediction is not none %}
     <div class="result-card mt-4">
         <div class="{{ 'fake' if prediction == 'FAKE' else 'real' }}">
@@ -76,7 +82,7 @@ HTML = """
     </div>
     {% endif %}
     <footer class="text-center mt-4" style="font-size: 0.9rem;">
-        &copy; 2025 Fake News Detector | Powered by AI
+        &copy; 2025 Fake News Detector | Arden University Project
     </footer>
 </div>
 </body>
@@ -99,3 +105,4 @@ def index():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
+
